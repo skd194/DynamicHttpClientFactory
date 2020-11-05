@@ -47,6 +47,9 @@ namespace Shared.DataOp
         {
             foreach (var (baseAddress, clientInfo) in DomainClientMap)
             {
+                /**********
+                 * Life time is decided by an algorithm. Based on usage frequency, probablity of usage etc.
+                 *********/
                 if (DateTime.UtcNow.Subtract(clientInfo.LastUsedOn) <= new TimeSpan(0, 1, 0)) continue;
                 DomainClientMap.TryRemove(baseAddress, out _);
                 clientInfo.DisposeClient();
